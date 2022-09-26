@@ -7,7 +7,7 @@ const main = async() => {
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
 
-  const program = anchor.workspace.Yourprojectnamehere;
+  const program = anchor.workspace.myepicproject;
   const baseAccount = anchor.web3.Keypair.generate();
   let tx = await program.rpc.startStuffOff({
     accounts: {
