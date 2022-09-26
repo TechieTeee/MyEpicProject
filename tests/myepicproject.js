@@ -7,7 +7,7 @@ const main = async() => {
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
 
-  const program = anchor.workspace.myepicproject;
+  const program = anchor.workspace.Myepicproject;
   const baseAccount = anchor.web3.Keypair.generate();
   let tx = await program.rpc.startStuffOff({
     accounts: {
@@ -20,6 +20,8 @@ const main = async() => {
   console.log("📝 Your transaction signature", tx);
 
   let account = await program.account.baseAccount.fetch(baseAccount.publicKey);
+  console.log('👀 GIF Count', account.totalGifs.toString())
+
   await program.rpc.addGif("https://media.giphy.com/media/ejJclNX60XyEo555wW/giphy.gif", {
     accounts: {
       baseAccount: baseAccount.publicKey,
@@ -32,8 +34,9 @@ const main = async() => {
 
   console.log('👀 GIF List', account.gifList)
 
+}
 
-  const runMain = async () => {
+const runMain = async () => {
   try {
     await main();
     process.exit(0);
@@ -43,4 +46,5 @@ const main = async() => {
   }
 };
 
-runMain();}
+runMain();
+
