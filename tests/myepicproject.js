@@ -20,19 +20,20 @@ const main = async() => {
   console.log("📝 Your transaction signature", tx);
 
   let account = await program.account.baseAccount.fetch(baseAccount.publicKey);
-  console.log('👀 GIF Count', account.totalGifs.toString())
-
-  await program.rpc.addGif({
+  await program.rpc.addGif("https://media.giphy.com/media/ejJclNX60XyEo555wW/giphy.gif", {
     accounts: {
       baseAccount: baseAccount.publicKey,
+      user: provider.wallet.publicKey,
     },
   });
 
   account = await program.account.baseAccount.fetch(baseAccount.publicKey);
   console.log('👀 GIF Count', account.totalGifs.toString())
-}
 
-const runMain = async () => {
+  console.log('👀 GIF List', account.gifList)
+
+
+  const runMain = async () => {
   try {
     await main();
     process.exit(0);
@@ -42,4 +43,4 @@ const runMain = async () => {
   }
 };
 
-runMain();
+runMain();}
